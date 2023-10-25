@@ -18,9 +18,7 @@ return new class extends Migration
             $table->text('description');
             $table->string('image');
             $table->string('carousel');
-            $table->string('video');
             $table->string('goal');
-            $table->string('raised');
             $table->datetime('start_date');
             $table->datetime('end_date');
             $table->enum('status', ['open', 'close', 'hold'])->default('close');

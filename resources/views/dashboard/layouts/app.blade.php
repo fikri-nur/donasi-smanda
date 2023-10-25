@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ isset($title) ? $title : 'Donasi SMANDA' }}</title>
+    <title>{{ isset($title) ? $title : 'SMANDA Beramal' }}</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
@@ -20,16 +20,17 @@
     {{-- Styles --}}
     <link rel="stylesheet" href="{{ asset('build/assets/app-5aed3ed4.css') }}">
     @stack('css')
+    
 </head>
 
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="{{ asset('assets/img/logo/473-SMAN_1_PANDAAN_PASURUAN.png') }}" alt=""
+                <a class="navbar-brand" href="{{ route('admin.dashboard') }}">
+                    <img src="{{ asset('assets/img/logo/logo navbar.png') }}" alt=""
                         style="max-width: 40px; font-weight: 900; font-size: 18px;">
-                    Donasi SMANDA
+                    SMANDA Beramal
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -42,13 +43,16 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="">Data User</a>
+                            <a class="nav-link" href="{{ route('admin.user.index') }}">Data User</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="">Data Campaign</a>
+                            <a class="nav-link" href="{{ route('admin.campaign.index') }}">Data Campaign</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="">Data Donatur</a>
+                            <a class="nav-link" href="{{ route('admin.donatur.index') }}">Data Donatur</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.rekening.index') }}">Data Rekening</a>
                         </li>
                     </ul>
 
@@ -78,10 +82,7 @@
 
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="#">
-                                        <i class="fas fa-user"></i> {{ __('Profil') }}
-                                    </a>
-                                    <a class="dropdown-item" href="{{ route('home') }}">
+                                    <a class="dropdown-item" href="{{ url('/') }}">
                                         <i class="fas fa-home"></i> {{ __('Home') }}
                                     </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
@@ -101,7 +102,7 @@
             </div>
         </nav>
 
-        <main class="py-4" style="height: 70vh">
+        <main class="py-4" style="min-height: 70vh">
             {{-- Alert --}}
             @include('partials.alert')
 
@@ -141,6 +142,7 @@
 
 
     <!-- Scripts -->
+    <script src="{{ asset('build/assets/app-c75e0372.js') }}"></script>
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
     @stack('js')

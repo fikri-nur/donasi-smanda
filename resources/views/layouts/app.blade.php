@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ isset($title) ? $title : 'Donasi SMANDA' }}</title>
+    <title>{{ isset($title) ? $title : 'SMANDA Beramal' }}</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
@@ -29,9 +29,9 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="{{ asset('assets/img/logo/473-SMAN_1_PANDAAN_PASURUAN.png') }}" alt=""
+                    <img src="{{ asset('assets/img/logo/logo navbar.png') }}" alt=""
                         style="max-width: 40px; font-weight: 900; font-size: 18px;">
-                    Donasi SMANDA
+                    SMANDA Beramal
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -50,7 +50,7 @@
                             <a class="nav-link" href="{{ route('all-campaign') }}">Donasi</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="">Tentang</a>
+                            <a class="nav-link" href="{{ route('about') }}">Tentang</a>
                         </li>
                     </ul>
 
@@ -80,9 +80,6 @@
 
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="#">
-                                        <i class="fas fa-user"></i> {{ __('Profil') }}
-                                    </a>
                                     @if (Auth::user()->role == 'admin')
                                         <a class="dropdown-item" href="{{ route('admin.dashboard') }}">
                                             <i class="fas fa-chart-bar"></i> {{ __('Dashboard Admin') }}
@@ -105,7 +102,7 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main class="py-4" style="min-height: 70vh">
             {{-- Alert --}}
             @include('partials.alert')
 

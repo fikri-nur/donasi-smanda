@@ -23,7 +23,6 @@ class User extends Authenticatable
         'name',
         'role',
         'phone_no',
-        'avatar',
         'email',
         'password',
     ];
@@ -53,13 +52,18 @@ class User extends Authenticatable
         return $this->hasMany(Campaign::class);
     }
 
-    public function getCreatedAtAttribute($value)
+    public function donaturs()
     {
-        return Carbon::parse($value)->format('d-m-Y H:i:s');
+        return $this->hasMany(Donatur::class);
     }
 
-    public function getUpdatedAtAttribute($value)
+    public function getFormattedCreatedAtAttribute()
     {
-        return Carbon::parse($value)->format('d-m-Y H:i:s');
+        return Carbon::parse($this->created_at)->translatedFormat('d-m-Y, H:i:s');
+    }
+
+    public function getFormattedUpdatedAtAttribute()
+    {
+        return Carbon::parse($this->updated_at)->translatedFormat('d-m-Y, H:i:s');
     }
 }

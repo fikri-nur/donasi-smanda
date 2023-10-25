@@ -22,53 +22,68 @@ class Campaign extends Model
             ->saveSlugsTo('slug');       // Nama field dalam tabel untuk menyimpan slug
     }
 
-
-    /**
-     * Get the user that owns the campaign.
-     */
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    /**
-     * Accessor for percentage of donation achieved.
-     *
-     * @return float
-     */
+    public function donatur()
+    {
+        return $this->hasMany(Donatur::class);
+    }
+
+    public function getFormattedGoalAttribute()
+    {
+        return number_format($this->goal, 0, ',', '.');
+    }
+
+    public function getTotalDonation()
+    {
+        return number_format(
+            $this->donatur()
+                ->where('payment_status', 'paid')
+                ->where('status', 'verified')
+                ->sum('amount'),
+            0,
+            ',',
+            '.'
+        );
+    }
+
     public function getDonationPercentageAttribute()
     {
-        return ($this->raised / $this->goal) * 100;
+        $totalDonation = $this->donatur()
+            ->where('payment_status', 'paid')
+            ->where('status', 'verified')
+            ->sum('amount');
+
+        return ($totalDonation / $this->goal) * 100;
     }
 
-    /**
-     * Accessor for formatted start date.
-     *
-     * @param string $value
-     * @return string
-     */
+    public function countTotalDonatur()
+    {
+        return $this->donatur()
+            ->where('payment_status', 'paid')
+            ->where('status', 'verified')
+            ->count();
+    }
+
+
     public function getFormattedStartDateAttribute()
     {
-        return Carbon::parse($this->start_date)->translatedFormat('d-m-Y H:i:s');
+        return Carbon::parse($this->start_date)->translatedFormat('d-m-Y, H:i:s');
     }
 
-    /**
-     * Accessor for formatted end date.
-     *
-     * @param string $value
-     * @return string
-     */
     public function getFormattedEndDateAttribute()
     {
-        return Carbon::parse($this->end_date)->translatedFormat('d-m-Y H:i:s');
+        return Carbon::parse($this->end_date)->translatedFormat('d-m-Y, H:i:s');
     }
 
-    /**
-     * Accessor for formatted created_at attribute.
-     *
-     * @param string $value
-     * @return string
-     */
+    public function getRemainingDaysAttribute()
+    {
+        return Carbon::parse($this->end_date)->diffInDays();
+    }
+
     public function getFormattedCreatedAtAttribute()
     {
         return Carbon::parse($this->created_at)->translatedFormat('d-m-Y, H:i:s');

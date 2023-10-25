@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Selamat Datang di Donasi SMANDA</div>
+                <div class="card-header">Selamat Datang di SMANDA Beramal</div>
 
                 <div class="card-body">
                     <p>Website ini adalah platform untuk mendukung kegiatan donasi di SMANDA. Anda dapat berdonasi untuk mendukung berbagai proyek sekolah dan kegiatan siswa.</p>
